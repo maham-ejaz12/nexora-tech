@@ -120,9 +120,10 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-white/50 text-sm">© {new Date().getFullYear()} Nexora Tech. All rights reserved.</p>
-          <div className="flex gap-6 text-sm">
-            <Link to="/contact" className="text-white/50 hover:text-white transition-colors">Privacy Policy</Link>
+          <div><p className="text-white/50 text-sm">© {new Date().getFullYear()} Nexora Tech. All rights reserved.</p>
+            <p className="text-white/40 text-xs mt-1">Demo Project • Created for learning and portfolio purposes only. This website does not represent a real company or business.</p>
+          </div>
+          <div className="flex gap-6 text-sm"><Link to="/contact" className="text-white/50 hover:text-white transition-colors">Privacy    Policy</Link>
             <Link to="/contact" className="text-white/50 hover:text-white transition-colors">Terms & Conditions</Link>
             <Link to="/contact" className="text-white/50 hover:text-white transition-colors">Cookies</Link>
           </div>
