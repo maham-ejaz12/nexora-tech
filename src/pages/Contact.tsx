@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Clock, Send, Navigation, Linkedin, Twitter, Github, CheckCircle2 } from 'lucide-react';
 import { PageHeader, SectionReveal } from '../components/ui';
+import { supabase } from '../lib/supabase';
 
 const offices = [
   { city: 'San Francisco', address: '535 Mission St, 14th Floor, San Francisco, CA 94105', phone: '+1 (415) 555-0199' },
@@ -19,10 +20,34 @@ export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', company: '', message: '' });
   const [sent, setSent] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+    const { error } = await supabase
+      .from('contact_messages')
+      .insert([
+       {
+         name: form.name,
+         email: form.email,
+         subject: form.company,
+         message: form.message,
+        },
+      ]);
+
+    if (error) {
+      console.error(error);
+      alert('Failed to send message.');
+      return;
+    }
+
     setSent(true);
-    setForm({ name: '', email: '', company: '', message: '' });
+    setForm({
+      name: '',
+      email: '',
+      company: '',
+      message: '',
+    });
+
     setTimeout(() => setSent(false), 5000);
   };
 
